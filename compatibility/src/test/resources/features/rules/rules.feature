@@ -1,7 +1,7 @@
 Feature: Rules
   You can place scenarios inside rules. This makes is possible to structure
   Gherkin documents in the same way as [example maps](https://cucumber.io/blog/bdd/example-mapping-introduction/).
-  You can also use the Examples synonym for Scenario to make them even more similar.
+  You can also use the Example synonym for Scenario to make them even more similar.
   
   Rule: a sale cannot happen if change cannot be returned
     # sad path
