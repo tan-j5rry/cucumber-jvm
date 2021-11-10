@@ -27,16 +27,22 @@ import java.util.Optional;
 public class Main {
 
     public static void main(String... argv) {
+
         // implement first pass at solution for issue identified in
-        // https://github.com/cucumber/cucumber-jvm/issues/2307 
+        // https://github.com/cucumber/cucumber-jvm/issues/2307
         try {
             byte exitStatus = run(argv, Thread.currentThread().getContextClassLoader());
             System.exit(exitStatus);
 
-        }catch(javax.net.ssl.SSLHandshakeException sslx) {
+        // swap out SSL for RuntimeException for now, until we can implement the
+        // appropriate test harness..
+        // }catch(javax.net.ssl.SSLHandshakeException sslx) {
+        } catch (RuntimeException rx) {
+            rx.printStackTrace();
             System.getProperties().forEach((k, v) -> System.out.println(k + ":" + v));
-        }
-    }
+        }//try-catch
+
+    }//main
 
     /**
      * Launches the Cucumber-JVM command line.
