@@ -1,0 +1,35 @@
+package io.cucumber.core.cli;
+
+import io.cucumber.core.feature.FeaturePath;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+
+import java.io.File;
+import java.net.URI;
+
+import static org.hamcrest.CoreMatchers.endsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.condition.OS.WINDOWS;
+
+public class MainTest {
+
+    @Test
+    void throw_iax() {
+        /*
+         * IllegalArgumentException exception = assertThrows(
+         * IllegalArgumentException.class, () -> "You Can't Touch 'Dis");
+         * assertThat(exception.getMessage(), is("You Can't Touch 'Dis"));
+         */
+        NumberFormatException thrown = Assertions.assertThrows(NumberFormatException.class, () -> {
+            Integer.parseInt("One");
+        }, "NumberFormatException was expected");
+
+        Assertions.assertEquals("For input string: \"One\"", thrown.getMessage());
+    }// iax
+
+}// class
