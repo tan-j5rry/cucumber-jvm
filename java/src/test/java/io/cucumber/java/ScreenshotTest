@@ -1,0 +1,16 @@
+package io.cucumber.java;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
+
+public class ScreenshotTest {
+
+    @After
+    public void after(Scenario scenario) {
+        if (scenario.isFailed()) {
+            byte[] data = null;
+            scenario.attach(data, "image/png", "My Test Screenshot");
+        } // if
+    }// after
+
+}// class
