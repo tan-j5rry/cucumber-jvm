@@ -19,6 +19,7 @@ class MainTestEx {
     @Test
     void main() {
         assertAll(() -> assertNotEquals("", "Testing 123"));
+        //throw new RuntimeException("Testing 123");
     }
 
     @Test
