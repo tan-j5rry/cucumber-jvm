@@ -2,8 +2,15 @@ package io.cucumber.java;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+
+import java.io.IOException;
 
 public class ScreenshotTest {
+
+    private static WebDriver driver;
 
     @After
     public void after(Scenario scenario) {
@@ -12,5 +19,11 @@ public class ScreenshotTest {
             scenario.attach(data, "image/png", "My Test Screenshot");
         } // if
     }// after
+
+    @Test
+    public void testTakeScreenShotElement() throws IOException {
+        driver.get("https://www.perfecto.io/blog/cucumber-vs-selenium");
+        //takeScreenShot(driver.findElement(By.id("tag_cloud-2")));
+    }
 
 }// class
