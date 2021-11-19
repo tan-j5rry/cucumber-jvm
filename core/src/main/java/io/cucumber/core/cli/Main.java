@@ -10,6 +10,11 @@ import org.apiguardian.api.API;
 
 import java.util.Optional;
 
+import org.junit.platform.commons.logging.Logger;
+import org.junit.platform.commons.logging.LoggerFactory;
+import java.util.function.Supplier;
+
+
 /**
  * Cucumber Main. Runs Cucumber as a CLI.
  * <p>
@@ -26,6 +31,8 @@ import java.util.Optional;
 @API(status = API.Status.STABLE)
 public class Main {
 
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String... argv) {
 
         // implement first pass at solution for issue identified in
@@ -34,15 +41,21 @@ public class Main {
             byte exitStatus = run(argv, Thread.currentThread().getContextClassLoader());
             System.exit(exitStatus);
 
-        // swap out SSL for RuntimeException for now, until we can implement the
-        // appropriate test harness..
-        // }catch(javax.net.ssl.SSLHandshakeException sslx) {
-        } catch (RuntimeException rx) {
-            rx.printStackTrace();
+            // swap out SSL for RuntimeException for now, until we can implement
+            // the
+            // appropriate test harness..
+            // }catch(javax.net.ssl.SSLHandshakeException sslx) {
+        } catch (RuntimeException rx) {0
+            //rx.printStackTrace();
+            logger.debug(new Supplier<String>() {
+                public String get() {
+                    return x.getMessage();
+                }
+            });
             System.getProperties().forEach((k, v) -> System.out.println(k + ":" + v));
-        }//try-catch
+        } // try-catch
 
-    }//main
+    }// main
 
     /**
      * Launches the Cucumber-JVM command line.
