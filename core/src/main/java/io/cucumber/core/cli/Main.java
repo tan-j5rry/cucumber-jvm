@@ -45,7 +45,7 @@ public class Main {
             // the
             // appropriate test harness..
             // }catch(javax.net.ssl.SSLHandshakeException sslx) {
-        } catch (RuntimeException rx) {0
+        } catch (RuntimeException rx) {
             //rx.printStackTrace();
             logger.debug(new Supplier<String>() {
                 public String get() {
