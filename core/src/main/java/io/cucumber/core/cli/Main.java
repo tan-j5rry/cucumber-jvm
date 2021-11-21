@@ -29,6 +29,12 @@ import java.util.function.Supplier;
  * {@link CommandlineOptions}.
  */
 @API(status = API.Status.STABLE)
+/*
+Suppress false positive for PMD finding that Main class does not abide by
+its Java class naming rules and/or standards, which is patently false.
+Since it clear does.  Suppress this error as false positive =>
+ The utility class name 'Main' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)' 
+ */
 public class Main {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
