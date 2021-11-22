@@ -1,9 +1,5 @@
 package io.cucumber.java;
 
-//import io.cucumber.core.logging.Logger;
-//import io.cucumber.core.logging.LoggerFactory;
-//import com.sun.org.slf4j.internal.Logger;
-//import com.sun.org.slf4j.internal.LoggerFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import org.h2.store.fs.FileUtils;
@@ -25,7 +21,7 @@ import java.util.function.Supplier;
 public class ScreenshotTest {
 
     private static WebDriver driver;
-    private static final String FOLDER = "/tmp//";
+    private static final String FOLDER = "/uiuc.cs427.cucumber";
     private static final Logger logger = LoggerFactory.getLogger(ScreenshotTest.class);
 
     @After
@@ -40,7 +36,9 @@ public class ScreenshotTest {
     public void testTakeScreenShotElement() throws IOException {
         try {
             driver.get("https://www.perfecto.io/blog/cucumber-vs-selenium");
-            takeScreenShot(driver.findElement(By.id("dialog-off-canvas-main-canvas")));
+            // takeScreenShot(driver.findElement(By.id("dialog-off-canvas-main-canvas")));
+            takeScreenShot(driver.findElement(By.id("path-node page-node-type-blog")));
+
         } catch (Exception x) {
             // x.printStackTrace();
             // logger.debug(x, Supplier < String > x.getMessage());
