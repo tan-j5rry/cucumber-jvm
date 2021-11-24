@@ -1,19 +1,13 @@
 package io.cucumber.core.cli;
 
-import io.cucumber.core.options.CommandlineOptionsParser;
-import io.cucumber.core.options.Constants;
-import io.cucumber.core.options.CucumberProperties;
-import io.cucumber.core.options.CucumberPropertiesParser;
-import io.cucumber.core.options.RuntimeOptions;
+import io.cucumber.core.logging.Logger;
+import io.cucumber.core.logging.LoggerFactory;
+import io.cucumber.core.options.*;
 import io.cucumber.core.runtime.Runtime;
 import org.apiguardian.api.API;
 
 import java.util.Optional;
-
-import org.junit.platform.commons.logging.Logger;
-import org.junit.platform.commons.logging.LoggerFactory;
 import java.util.function.Supplier;
-
 
 /**
  * Cucumber Main. Runs Cucumber as a CLI.
@@ -30,10 +24,10 @@ import java.util.function.Supplier;
  */
 @API(status = API.Status.STABLE)
 /*
-Suppress false positive for PMD finding that Main class does not abide by
-its Java class naming rules and/or standards, which is patently false.
-Since it clear does.  Suppress this error as false positive =>
- The utility class name 'Main' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)' 
+ * Suppress false positive for PMD finding that Main class does not abide by its
+ * Java class naming rules and/or standards, which is patently false. Since it
+ * clear does. Suppress this error as false positive =>  The utility class name
+ * 'Main' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'
  */
 public class Main {
 
@@ -52,10 +46,10 @@ public class Main {
             // appropriate test harness..
             // }catch(javax.net.ssl.SSLHandshakeException sslx) {
         } catch (RuntimeException rx) {
-            //rx.printStackTrace();
+            // rx.printStackTrace();
             logger.debug(new Supplier<String>() {
                 public String get() {
-                    return x.getMessage();
+                    return rx.getMessage();
                 }
             });
             System.getProperties().forEach((k, v) -> System.out.println(k + ":" + v));
