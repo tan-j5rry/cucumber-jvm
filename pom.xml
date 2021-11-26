@@ -227,8 +227,13 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <executions>
                     <execution>
+                        <!-- bypass validation and verification
+                        in favor of checkstyle-validation set to none
                         <id>validate</id>
                         <phase>verify</phase>
+                        -->
+                        <id>checkstyle-validation</id>
+                        <phase>none</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
