@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public class ScreenshotTest {
 
     private static WebDriver driver;
-    private static final String FOLDER = "/uiuc.cs427.cucumber";
+    private static final String FOLDER = "../uiuc.cs427.cucumber";
     private static final Logger logger = LoggerFactory.getLogger(ScreenshotTest.class);
 
     @After
@@ -53,6 +53,20 @@ public class ScreenshotTest {
         try {
             driver.get("https://docs.codecov.com/docs");
             takeScreenShot(driver.findElement(By.id("callout callout_warn")));
+        } catch (Exception x) {
+            logger.debug(new Supplier<String>() {
+                public String get() {
+                    return x.getMessage();
+                }
+            });
+        }
+    }// test
+
+    @Test
+    public void testTakeScreenShotElementExA() throws IOException {
+        try {
+            driver.get("https://www.oreilly.com/");
+            takeScreenShot(driver.findElement(By.id("content")));
         } catch (Exception x) {
             logger.debug(new Supplier<String>() {
                 public String get() {
