@@ -83,6 +83,15 @@ public class ScreenshotTest {
         BufferedImage img = ImageIO.read(screen);
         BufferedImage dest = img.getSubimage(p.getX(), p.getY(), rect.width, rect.height);
         ImageIO.write(dest, "png", screen);
-        org.apache.commons.io.FileUtils.copyFile(screen, new File(FOLDER + System.nanoTime() + ".png"));
+        File da = new File(FOLDER + System.nanoTime() + ".png");
+        System.out.println("APPLE PIE: " + da.toPath());
+        logger.info(new Supplier<String>() {
+            public String get() {
+                return "APPLE PIE: " + da.getPath();
+            }
+        });
+        org.apache.commons.io.FileUtils.copyFile(screen, da);
+        // org.apache.commons.io.FileUtils.copyFile(screen, new File(FOLDER +
+        // System.nanoTime() + ".png"));
     }
 }// class
