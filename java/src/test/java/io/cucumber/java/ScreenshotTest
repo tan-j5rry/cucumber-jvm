@@ -90,6 +90,20 @@ public class ScreenshotTest {
         }
     }// test
 
+    @Test
+    public void testTakeScreenShotElementExC() throws IOException {
+        try {
+            driver.get("https://angular.io/");
+            takeScreenShot(driver.findElement(By.id("background-sky hero")));
+        } catch (Exception x) {
+            logger.debug(new Supplier<String>() {
+                public String get() {
+                    return x.getMessage();
+                }
+            });
+        }
+    }// test
+
     public void takeScreenShot(WebElement element) throws IOException {
         File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         Point p = element.getLocation();
