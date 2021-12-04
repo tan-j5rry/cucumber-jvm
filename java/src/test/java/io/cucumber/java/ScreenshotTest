@@ -118,6 +118,20 @@ public class ScreenshotTest {
         }
     }// test
 
+    @Test
+    public void testTakeScreenShotElementExE() throws IOException {
+        try {
+            driver.get("https://www.microfocus.com/");
+            takeScreenShot(driver.findElement(By.id(" undefined")));
+        } catch (Exception x) {
+            logger.debug(new Supplier<String>() {
+                public String get() {
+                    return x.getMessage();
+                }
+            });
+        }
+    }// test
+
     public void takeScreenShot(WebElement element) throws IOException {
         File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         Point p = element.getLocation();
