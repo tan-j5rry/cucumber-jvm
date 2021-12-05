@@ -8,6 +8,7 @@ import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import javax.imageio.ImageIO;
 
@@ -19,8 +20,41 @@ import java.util.function.Supplier;
 public class ScreenshotTest {
 
     private static WebDriver driver;
-    private static final String FOLDER = "../uiuc.cs427.cucumber";
+    // private static final String FOLDER = "../uiuc.cs427.cucumber";
+    private static final String FOLDER = "/Users/jerrytan/cs427";
     private static final Logger logger = LoggerFactory.getLogger(ScreenshotTest.class);
+
+    @Before
+    public void init() {
+        logger.info(new Supplier<String>() {
+            public String get() {
+                return "init ScreenshotTest..";
+            }
+        });
+        System.setProperty("webdriver.gecko.driver", "/Users/jerrytan/Downloads/geckodriver 2");
+        driver = new FirefoxDriver();
+
+        driver.get("http://apttest.in");
+
+        try{
+            //take screenshot with driver and persist to location specified in output
+            File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+
+            //copy file with apache file utils
+            org.apache.commons.io.FileUtils.copyFile(screenshot,new File("/Users/jerrytan/Downloads/cs427.ScreenshotTest.jpeg"));
+
+        }catch(Exception e){
+            //take screenshot if exception thrown
+            System.out.println("Failure to take screenshot "+e);
+
+        }
+        finally
+        {
+            //finally block to release resources, as appropriate.
+            driver.quit();
+        }
+
+    }// init
 
     @After
     public void after(Scenario scenario) {
