@@ -166,6 +166,20 @@ public class ScreenshotTest {
         }
     }// test
 
+    @Test
+    public void testTakeScreenShotElementExF() throws IOException {
+        try {
+            driver.get("https://getbootstrap.com/");
+            takeScreenShot(driver.findElement(By.id("skippy visually-hidden-focusable overflow-hidden")));
+        } catch (Exception x) {
+            logger.debug(new Supplier<String>() {
+                public String get() {
+                    return x.getMessage();
+                }
+            });
+        }
+    }// test
+
     public void takeScreenShot(WebElement element) throws IOException {
         File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         Point p = element.getLocation();
