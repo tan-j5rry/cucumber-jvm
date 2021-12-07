@@ -38,7 +38,7 @@ public class ScreenshotTest {
     private static final String FOLDER = "/Users/jerrytan/cs427";
     private static final Logger logger = LoggerFactory.getLogger(ScreenshotTest.class);
 
-    @Before
+    // @Before
     public void init() {
         logger.info(new Supplier<String>() {
             public String get() {
@@ -70,7 +70,7 @@ public class ScreenshotTest {
 
     }// init
 
-    @After
+    // @After
     public void after(Scenario scenario) {
         if (scenario.isFailed()) {
             byte[] data = null;
@@ -82,7 +82,7 @@ public class ScreenshotTest {
         } // if
     }// after
 
-    @Test
+    // @Test
     public void testTakeScreenShotElement() throws IOException {
         try {
             driver.get("https://www.perfecto.io/blog/cucumber-vs-selenium");
@@ -96,7 +96,7 @@ public class ScreenshotTest {
         }
     }// test
 
-    @Test
+    // @Test
     public void testTakeScreenShotElementEx() throws IOException {
         try {
             driver.get("https://docs.codecov.com/docs");
@@ -110,7 +110,7 @@ public class ScreenshotTest {
         }
     }// test
 
-    @Test
+    // @Test
     public void testTakeScreenShotElementExA() throws IOException {
         try {
             driver.get("https://www.oreilly.com/");
@@ -124,7 +124,7 @@ public class ScreenshotTest {
         }
     }// test
 
-    @Test
+    // @Test
     public void testTakeScreenShotElementExB() throws IOException {
         try {
             driver.get("https://aws.amazon.com/");
@@ -138,7 +138,7 @@ public class ScreenshotTest {
         }
     }// test
 
-    @Test
+    // @Test
     public void testTakeScreenShotElementExC() throws IOException {
         try {
             driver.get("https://angular.io/");
@@ -152,7 +152,7 @@ public class ScreenshotTest {
         }
     }// test
 
-    @Test
+    // @Test
     public void testTakeScreenShotElementExD() throws IOException {
         try {
             driver.get("https://spring.io/");
@@ -166,7 +166,7 @@ public class ScreenshotTest {
         }
     }// test
 
-    @Test
+    // @Test
     public void testTakeScreenShotElementExE() throws IOException {
         try {
             driver.get("https://www.microfocus.com/");
@@ -180,7 +180,7 @@ public class ScreenshotTest {
         }
     }// test
 
-    @Test
+    // @Test
     public void testTakeScreenShotElementExF() throws IOException {
         try {
             driver.get("https://getbootstrap.com/");
@@ -194,7 +194,7 @@ public class ScreenshotTest {
         }
     }// test
 
-    @Test
+    // @Test
     public void testTakeScreenShotElementExG() throws IOException {
         try {
             driver.get("https://junit.org/junit5/");
@@ -208,6 +208,7 @@ public class ScreenshotTest {
         }
     }// test
 
+    // add javadoc
     public void takeScreenShot(WebElement element) throws IOException {
         File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         Point p = element.getLocation();
@@ -251,12 +252,15 @@ public class ScreenshotTest {
 
     @org.junit.jupiter.api.AfterEach
     void tearDown() {
+        // no op
     }
 
     @org.junit.jupiter.api.Test
     void main() {
+        // no op
     }
 
+    // add javadoc
     public void takeScreenshot(String pathname) throws IOException {
         File src = ((TakesScreenshot) chrome_driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(src, new File(pathname));
