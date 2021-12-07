@@ -227,10 +227,14 @@ public class ScreenshotTest {
         // System.nanoTime() + ".png"));
     }
 
+    /**********************/
+    /* BEGIN */
+    /**********************/
     /* alternate universe */
+    /**********************/
     private static ChromeDriver chrome_driver;
 
-    private static String FOLDER = "/Users/jerrytan/cs427/";
+    private static String CHROME_FOLDER = "/Users/jerrytan/cs427/";
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
@@ -282,11 +286,16 @@ public class ScreenshotTest {
              * File(resolveTestResourcePath("google-logo.png"))); assertTrue(new
              * File(resolveTestResourcePath("google-logo.png")).exists());
              */
-            ImageIO.write(screenshot.getImage(), "jpg", new File(FOLDER + "google-logo.png"));
-            assertTrue(new File(FOLDER + "google-logo.png").exists());
+            ImageIO.write(screenshot.getImage(), "jpg", new File(CHROME_FOLDER + "google-logo.png"));
+            assertTrue(new File(CHROME_FOLDER + "google-logo.png").exists());
         } finally {
             chrome_driver.quit();
-        }//try finally
-    }//test
+        } // try finally
+    }// test
+    /**********************/
+    /* END */
+    /**********************/
+    /* alternate universe */
+    /**********************/
 
 }// class
