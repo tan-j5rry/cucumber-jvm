@@ -50,21 +50,21 @@ public class ScreenshotTest {
 
         driver.get("http://apttest.in");
 
-        try{
-            //take screenshot with driver and persist to location specified in output
-            File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            // take screenshot with driver and persist to location specified in
+            // output
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-            //copy file with apache file utils
-            org.apache.commons.io.FileUtils.copyFile(screenshot,new File("/Users/jerrytan/Downloads/cs427.ScreenshotTest.jpeg"));
+            // copy file with apache file utils
+            org.apache.commons.io.FileUtils.copyFile(screenshot,
+                new File("/Users/jerrytan/Downloads/cs427.ScreenshotTest.jpeg"));
 
-        }catch(Exception e){
-            //take screenshot if exception thrown
-            System.out.println("Failure to take screenshot "+e);
+        } catch (Exception e) {
+            // take screenshot if exception thrown
+            System.out.println("Failure to take screenshot " + e);
 
-        }
-        finally
-        {
-            //finally block to release resources, as appropriate.
+        } finally {
+            // finally block to release resources, as appropriate.
             driver.quit();
         }
 
@@ -226,4 +226,67 @@ public class ScreenshotTest {
         // org.apache.commons.io.FileUtils.copyFile(screen, new File(FOLDER +
         // System.nanoTime() + ".png"));
     }
+
+    /* alternate universe */
+    private static ChromeDriver chrome_driver;
+
+    private static String FOLDER = "/Users/jerrytan/cs427/";
+
+    @org.junit.jupiter.api.BeforeEach
+    void setUp() {
+        System.setProperty("webdriver.chrome.driver", "/Users/jerrytan/Downloads/chromedriver");
+
+        Capabilities capabilities = DesiredCapabilities.chrome();
+        chrome_driver = new ChromeDriver(capabilities);
+        chrome_driver.manage()
+                .timeouts()
+                .implicitlyWait(5, TimeUnit.SECONDS);
+
+        chrome_driver.get("http://www.google.com/");
+    }
+
+    @org.junit.jupiter.api.AfterEach
+    void tearDown() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void main() {
+    }
+
+    public void takeScreenshot(String pathname) throws IOException {
+        File src = ((TakesScreenshot) chrome_driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(src, new File(pathname));
+    }// takeScreenshot
+
+    @Test
+    public void whenGoogleIsLoaded_thenCaptureScreenshot() throws IOException {
+        /*
+         * takeScreenshot(resolveTestResourcePath("google-home.png"));
+         * assertTrue(new
+         * File(resolveTestResourcePath("google-home.png")).exists());
+         */
+    }
+
+    // @Test
+    @org.junit.jupiter.api.Test
+    public void whenGoogleIsLoaded_thenCaptureLogo() throws IOException {
+        try {
+            WebElement logo = chrome_driver.findElement(By.id("hplogo"));
+
+            Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
+                    .coordsProvider(new WebDriverCoordsProvider())
+                    .takeScreenshot(chrome_driver, logo);
+
+            /*
+             * ImageIO.write(screenshot.getImage(), "jpg", new
+             * File(resolveTestResourcePath("google-logo.png"))); assertTrue(new
+             * File(resolveTestResourcePath("google-logo.png")).exists());
+             */
+            ImageIO.write(screenshot.getImage(), "jpg", new File(FOLDER + "google-logo.png"));
+            assertTrue(new File(FOLDER + "google-logo.png").exists());
+        } finally {
+            chrome_driver.quit();
+        }//try finally
+    }//test
+
 }// class
