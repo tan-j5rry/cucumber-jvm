@@ -36,21 +36,21 @@ public class ScreenshotTest {
 
         driver.get("http://apttest.in");
 
-        try{
-            //take screenshot with driver and persist to location specified in output
-            File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            // take screenshot with driver and persist to location specified in
+            // output
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-            //copy file with apache file utils
-            org.apache.commons.io.FileUtils.copyFile(screenshot,new File("/Users/jerrytan/Downloads/cs427.ScreenshotTest.jpeg"));
+            // copy file with apache file utils
+            org.apache.commons.io.FileUtils.copyFile(screenshot,
+                new File("/Users/jerrytan/Downloads/cs427.ScreenshotTest.jpeg"));
 
-        }catch(Exception e){
-            //take screenshot if exception thrown
-            System.out.println("Failure to take screenshot "+e);
+        } catch (Exception e) {
+            // take screenshot if exception thrown
+            System.out.println("Failure to take screenshot " + e);
 
-        }
-        finally
-        {
-            //finally block to release resources, as appropriate.
+        } finally {
+            // finally block to release resources, as appropriate.
             driver.quit();
         }
 
@@ -171,6 +171,20 @@ public class ScreenshotTest {
         try {
             driver.get("https://getbootstrap.com/");
             takeScreenShot(driver.findElement(By.id("skippy visually-hidden-focusable overflow-hidden")));
+        } catch (Exception x) {
+            logger.debug(new Supplier<String>() {
+                public String get() {
+                    return x.getMessage();
+                }
+            });
+        }
+    }// test
+
+    @Test
+    public void testTakeScreenShotElementExG() throws IOException {
+        try {
+            driver.get("https://www.binance.com/");
+            takeScreenShot(driver.findElement(By.id("css-tq0shg")));
         } catch (Exception x) {
             logger.debug(new Supplier<String>() {
                 public String get() {
