@@ -61,7 +61,7 @@ public class ScreenshotTest {
 
         } catch (Exception e) {
             // take screenshot if exception thrown
-            System.out.println("Failure to take screenshot " + e);
+            // System.out.println("Failure to take screenshot " + e);
 
         } finally {
             // finally block to release resources, as appropriate.
@@ -217,7 +217,7 @@ public class ScreenshotTest {
         BufferedImage dest = img.getSubimage(p.getX(), p.getY(), rect.width, rect.height);
         ImageIO.write(dest, "png", screen);
         File da = new File(FOLDER + System.nanoTime() + ".png");
-        System.out.println("APPLE PIE: " + da.toPath());
+        // System.out.println("APPLE PIE: " + da.toPath());
         logger.info(new Supplier<String>() {
             public String get() {
                 return "APPLE PIE: " + da.getPath();
@@ -235,7 +235,7 @@ public class ScreenshotTest {
     /**********************/
     private static ChromeDriver chrome_driver;
 
-    private static String CHROME_FOLDER = "/Users/jerrytan/cs427/";
+    private final static String CHROME_FOLDER = "/Users/jerrytan/cs427/";
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
@@ -253,12 +253,26 @@ public class ScreenshotTest {
     @org.junit.jupiter.api.AfterEach
     void tearDown() {
         // no op
-    }
+        chrome_driver.quit();
+    }// tear down
 
     @org.junit.jupiter.api.Test
     void main() {
         // no op
-    }
+        test_this();
+    }//
+
+    private final void test_this() {
+        try {
+            whenGoogleIsLoaded_thenCaptureLogo();
+        } catch (Exception x) {
+            logger.debug(new Supplier<String>() {
+                public String get() {
+                    return x.getMessage();
+                }
+            });
+        }
+    }// pfv utility
 
     // add javadoc
     public void takeScreenshot(String pathname) throws IOException {
@@ -273,7 +287,15 @@ public class ScreenshotTest {
          * assertTrue(new
          * File(resolveTestResourcePath("google-home.png")).exists());
          */
-    }
+
+        /*
+         * takeScreenshot(resolveTestResourcePath("google-home.png"));
+         * assertTrue(new
+         * File(resolveTestResourcePath("google-home.png")).exists());
+         */
+        whenGoogleIsLoaded_thenCaptureLogo();
+        test_this_x("hplogo", "screenshot_x");
+    }// when google loaded
 
     // @Test
     @org.junit.jupiter.api.Test
@@ -296,6 +318,34 @@ public class ScreenshotTest {
             chrome_driver.quit();
         } // try finally
     }// test
+
+    // @Test
+    // @org.junit.jupiter.api.Test
+    public void test_this_x(String element_x, String file) throws IOException {
+        try {
+            WebElement logo = chrome_driver.findElement(By.id(element_x));
+
+            Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
+                    .coordsProvider(new WebDriverCoordsProvider())
+                    .takeScreenshot(chrome_driver, logo);
+
+            /*
+             * ImageIO.write(screenshot.getImage(), "jpg", new
+             * File(resolveTestResourcePath("google-logo.png"))); assertTrue(new
+             * File(resolveTestResourcePath("google-logo.png")).exists());
+             */
+            /*
+             * ImageIO.write(screenshot.getImage(), "jpg", new
+             * File(CHROME_FOLDER + "google-logo.png")); assertTrue(new
+             * File(CHROME_FOLDER + "google-logo.png").exists());
+             */
+            ImageIO.write(screenshot.getImage(), "jpg", new File(CHROME_FOLDER + file));
+            assertTrue(new File(CHROME_FOLDER + file).exists());
+        } finally {
+            chrome_driver.quit();
+        } // try finally
+    }// test
+
     /**********************/
     /* END */
     /**********************/
