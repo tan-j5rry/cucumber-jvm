@@ -323,6 +323,7 @@ public class ScreenshotTest {
     // @org.junit.jupiter.api.Test
     public void test_this_x(String element_x, String file) throws IOException {
         try {
+            setUp();
             WebElement logo = chrome_driver.findElement(By.id(element_x));
 
             Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
