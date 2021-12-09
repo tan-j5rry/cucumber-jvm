@@ -208,6 +208,21 @@ public class ScreenshotTest {
         }
     }// test
 
+    // @Test
+    public void testTakeScreenShotElementExH() throws IOException {
+        try {
+            driver.get("https://spring.io/projects/spring-batch");
+            takeScreenShot(driver.findElement(By.id("has-menu")));
+        } catch (Exception x) {
+            logger.debug(new Supplier<String>() {
+                public String get() {
+                    return x.getMessage();
+                }
+            });
+        }
+    }// test
+
+
     // add javadoc
     public void takeScreenShot(WebElement element) throws IOException {
         File screen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
